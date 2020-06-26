@@ -1,0 +1,230 @@
+-- | Este módulo define funções comuns da Tarefa 3 do trabalho prático.
+module Tarefa3_2018li1g002 where
+
+import LI11819
+import Data.Char
+import Tarefa0_2018li1g002
+import Tarefa1_2018li1g002
+import Tarefa2_2018li1g002
+
+-- * Testes
+
+-- | Testes unitários da Tarefa 3.
+--
+-- Cada teste é um 'Estado'.
+testesT3 :: [Estado]
+testesT3 = []
+
+-- * Funções principais da Tarefa 3.
+
+-- | Comprime um 'Estado' para formato textual.
+--
+-- __NB:__ A função 'show' representa um 'Estado' num formato textual facilmente legível mas extenso.
+--
+-- __NB:__ Uma boa solução deve representar o 'Estado' dado no mínimo número de caracteres possível.
+--comprime :: Estado -> String
+--comprime e = total (mapaEstado e) ++ 
+
+
+
+-- Comprime o Mapa 
+antesDeComprimir :: Mapa -> Mapa
+antesDeComprimir [] = []
+antesDeComprimir l = aDC (drop 1 l)
+
+aDC :: Mapa -> Mapa
+aDC [] = []
+aDC l = retirar1C   (take ((length l)-1) l)
+
+retirar1C :: Mapa -> Mapa
+retirar1C [] = []
+retirar1C (h:t) = retirar2C ((drop 1 h):retirar1C t)
+
+retirar2C :: Mapa -> Mapa
+retirar2C [] = []
+retirar2C (h:t) = (take ((length h)-1) h):retirar2C t
+
+
+comprimeMapa :: Mapa -> String
+comprimeMapa [] = []
+comprimeMapa (l:t) = (comprimeLinha l) ++ comprimeMapa t
+
+comprimeLinha :: [Peca] -> String
+comprimeLinha [] = []
+comprimeLinha (h:t) | h == x = "i" ++ comprimeLinha t
+                    | h == y = "d" ++ comprimeLinha t
+                    | otherwise = "v" ++ comprimeLinha t
+                    where x = Bloco Indestrutivel
+                          y = Bloco Destrutivel
+
+constroiMSet' :: String -> String
+constroiMSet' [] = []
+constroiMSet' (h:t) = show ((cM 1 h t)+1) ++ [h] ++ constroiMSet' (drop (cM 1 h t) t)
+
+cM :: Int -> Char -> String -> Int
+cM x h [] = 0
+cM a h (x:xs) | h==x = a+cM a h xs
+              | otherwise = 0
+
+dimensaodoMapa :: Mapa -> String
+dimensaodoMapa l = mapaString (dimensaoMapa l)
+
+
+dimensaoMapa :: Mapa -> Dimensao
+dimensaoMapa [] = (0,0)
+dimensaoMapa l = (nLi l , length (head l))
+
+mapaString :: Dimensao -> String
+mapaString (x,y) = "," ++ show x ++ "," ++ show y
+
+
+total :: Mapa -> String
+total l = constroiMSet' (comprimeMapa (antesDeComprimir l)) ++ dimensaodoMapa l
+---
+
+
+
+-- | Descomprime um 'Estado' no formato textual utilizado pela função 'comprime'.
+--
+-- __NB:__ A função 'comprime' é válida de for possível recuperar o 'Estado' utilizando a função 'descomprime', i.e.:
+--
+-- prop> descomprime . comprime = id
+--
+-- __NB:__ Esta propriedade é particularmente válida para a solução pré-definida:
+--
+-- prop> read . show = id
+--descomprime :: String -> Estado
+--descomprime l = codigoFinalM l
+
+
+------Descomprimir o mapa
+
+antesdaDesco :: String -> String
+antesdaDesco [] = []
+antesdaDesco (h:t) | (ord h) /= (ord ',') = h :antesdaDesco t
+                   | otherwise = [] 
+
+descomprimeDimensao :: String -> String
+descomprimeDimensao [] = []
+descomprimeDimensao (h:t) | (ord h) /= (ord ',') = descomprimeDimensao t
+                          | otherwise = t
+
+
+juncao :: String -> Int
+juncao l | (length (buscaN (desco l)) == 1) = trans (buscaN (desco l))
+         | otherwise = convert (trans2 (buscaN (desco l)))
+
+--troco tudo para inteiros 
+desco :: String -> [Int]
+desco [] = []
+desco (h:t) =  (ord h): desco t
+
+trans :: [Int] -> Int
+trans [x] = bin2dec [chr x] 
+
+trans2 :: [Int] -> [Int]
+trans2 [] = []
+trans2 (h:t) = ([trans [h]] ++ trans2 t)
+
+convert :: [Int] -> Int
+convert [x] = x
+convert (h:t) = read (concat (map show (h:t))) :: Int
+
+--buscar as primeiros Inteiros
+buscaN :: [Int] -> [Int]
+buscaN [] = []
+buscaN (h:t) | isDigit (chr h) = h:buscaN t
+             | otherwise = []
+
+bin2dec :: String -> Int
+bin2dec "" = 0
+bin2dec s = let l = length s - 1
+            in bin2dec' s l
+                   
+bin2dec' :: String -> Int -> Int
+bin2dec' "" _ = 0
+bin2dec' (x:xs) l = (toInt x)*(2^l) + bin2dec' xs (l-1)
+  
+toInt :: Char -> Int
+toInt c = ord c - ord '0'
+--------------------
+buscaL :: [Int] -> Char
+buscaL (h:t) | isDigit (chr h) = buscaL t
+             | otherwise = chr h
+
+buscades :: String -> Char
+buscades l = buscaL (desco l)
+
+rest :: [Int] -> [Int]
+rest [] = []
+rest (h:t) | isDigit (chr h) = rest t
+           | otherwise = (h:t)
+
+encontra :: String -> Int
+encontra [] = 0
+encontra l = length (rest (desco l))
+
+constrois :: String -> [(Int,Char)]
+constrois [] = []
+constrois l = (juncao l,buscades l) : constrois (drop (length l+1 - encontra l) l)
+
+descomprimeEmSet :: String -> [(Int,Char)]
+descomprimeEmSet [] = []
+descomprimeEmSet l = constrois (antesdaDesco l)
+
+-----------------
+
+sDimensao :: String -> (String,String)
+sDimensao l = (antesdaDesco l,descomprimeDimensao l)
+
+stringDimensao :: (String,String) -> (Int,Int)
+stringDimensao (h,t) = (juncao h, juncao t)
+
+descomprimeADimensao :: String -> (Int,Int)
+descomprimeADimensao l = stringDimensao (sDimensao (descomprimeDimensao l))
+
+-------------------------------------------
+
+descomprime :: [(Int,Char)] -> [(Int,Peca)]
+descomprime [] = []
+descomprime ((a,b):t) | b == 'i' = (a,x) :descomprime t
+                      | b == 'd' = (a,y) :descomprime t
+                      | otherwise = (a,z) :descomprime t
+                      where x = Bloco Indestrutivel
+                            y = Bloco Destrutivel
+                            z = Vazia
+
+
+descomp :: String -> [(Int,Peca)]
+descomp [] = []
+descomp l = descomprime (descomprimeEmSet l)
+
+--------------------------------------------
+--Funcoes importantes : descomp e descomprimeADimensao
+
+insertExp :: Peca -> Dimensao -> Dimensao ->[Peca] -> [Peca]
+insertExp _ _ _ [] = []
+insertExp k (x,y) (a,b) (h:t) | (b-2)/=0 = h:insertExp k (x,y) (a,b-1) t
+                              | otherwise = k:k:insertExp k (x,y) (x,y) t
+
+
+insertExtremidade :: [Peca] -> Dimensao -> Peca -> [Peca]
+insertExtremidade [] _ _ = []
+insertExtremidade l (x,y) b = (replicate (y+1) b) ++ l ++ (replicate (y-1) b)
+
+
+codigoFinal :: Peca -> Dimensao -> String -> [Peca]
+codigoFinal b (x,y) l = insertExtremidade (insertExp (Bloco Indestrutivel) (x,y) (x,y) (criacaoDoMapa (descomp l))) (x,y) (Bloco Indestrutivel)
+
+setMapa :: String -> [Peca]
+setMapa l = codigoFinal (Bloco Indestrutivel) (descomprimeADimensao l) l
+
+
+criacaoDoMapa :: [(Int,Peca)] -> [Peca]
+criacaoDoMapa [] = []
+criacaoDoMapa ((a,b):t) = (replicate a b)++criacaoDoMapa t 
+
+
+codigoFinalM :: String -> Mapa
+codigoFinalM [] = []
+codigoFinalM l = matrizTrans (setMapa l) (descomprimeADimensao l)

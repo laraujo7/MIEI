@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['fatunipalavras_249',['fatUniPalavras',['../menu_8h.html#ac08056f2ff4e40996b50344942cabd7b',1,'menu.h']]],
+  ['fatunipalavrasg_250',['FatUniPalavrasG',['../menu_8h.html#af266f5d4df10cbe269f8e4ed894ea21a',1,'menu.h']]],
+  ['filesinfo_251',['filesInfo',['../menu_8h.html#ab837a9780a4268b0948aa62e3b35c45c',1,'menu.h']]],
+  ['filiaispalavras_252',['filiaisPalavras',['../menu_8h.html#a47821908a1281c44b07cf94d0530b713',1,'menu.h']]],
+  ['findclientesofallbranches_253',['findClientesOfAllBranches',['../clients_8h.html#a5109d671747195de6fe03979551c8566',1,'clients.h']]],
+  ['findclientfavotiteproducts_254',['findClientFavotiteProducts',['../sales_8h.html#a1350d7d142f97192dc022b8f56eef1bd',1,'sales.h']]],
+  ['findclientsneverboughtcount_255',['findClientsNeverBoughtCount',['../clients_8h.html#a778c04cf3f718d4f411a880fa19f3362',1,'clients.h']]],
+  ['findcls_256',['findCLS',['../sales_8h.html#aa66376aa449a743395211fd107bf12e1',1,'sales.h']]],
+  ['finddata_257',['findData',['../sales_8h.html#afdca12413c645a0376916c6283bf7065',1,'sales.h']]],
+  ['findproductsalesandprofit_258',['findProductSalesAndProfit',['../sales_8h.html#a870d49075c05a4f943a408370e54234e',1,'sales.h']]],
+  ['findproductsbyletter_259',['findProductsByLetter',['../products_8h.html#a46b2968f012840d9bd97b4c100a3cea0',1,'products.h']]],
+  ['findproductsellesbyclient_260',['findProductSellesByClient',['../sales_8h.html#a4969f518803d51000ea1198da48e9b2e',1,'sales.h']]],
+  ['findproductsneverbought_261',['findProductsNeverBought',['../products_8h.html#aac809da68281c6d3170447e1231e6f38',1,'products.h']]],
+  ['findproductsneverboughtcount_262',['findProductsNeverBoughtCount',['../products_8h.html#a146da467b759d967fa92fd7e04754abb',1,'products.h']]],
+  ['findsalesandprofit_263',['findSalesAndProfit',['../sgv_8h.html#aaff80ec3eca7e9cd6a92684e9d7f9152',1,'sgv.h']]],
+  ['findsalesmerge_264',['findSalesMerge',['../sales_8h.html#afe27d7d052cdb0936a849ce5e6d5367a',1,'sales.h']]]
+];

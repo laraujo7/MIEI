@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['setaspalavras_359',['setasPalavras',['../menu_8h.html#a81fed2901a71618693d0b47c6014b16e',1,'menu.h']]],
+  ['showandgetoptionmenu2_360',['showAndGetOptionMenu2',['../menu_8h.html#ab8db85ceb4e3d67f78cefc8d2691fa5f',1,'menu.h']]],
+  ['showclientfavoriteproducts_361',['showClientFavoriteProducts',['../menu_8h.html#ab4cf1f785feba32f1b3f71451ad7716c',1,'menu.h']]],
+  ['showclientsandproductsneverboughtcount_362',['showClientsAndProductsNeverBoughtCount',['../menu_8h.html#af6f33bf9cfe162fe3d7bff2812832c65',1,'menu.h']]],
+  ['showclientsofallbranches_363',['showClientsOfAllBranches',['../menu_8h.html#ac64c4c1a72ed4fdb831713a1d9abd4b8',1,'menu.h']]],
+  ['showclienttopprofitproducts_364',['showClientTopProfitProducts',['../menu_8h.html#afc191f1aa1be60a829a7593bb97a2af6',1,'menu.h']]],
+  ['showdestructiontime_365',['showDestructionTime',['../menu_8h.html#a16dafb2e5c30b047990aad3e6df28426',1,'menu.h']]],
+  ['showfilesinfo_366',['showFilesInfo',['../interface_8h.html#aa73b8fdac05bf959c68f553933490121',1,'interface.h']]],
+  ['showmenu1_367',['showMenu1',['../menu_8h.html#a94a1fd8c6eec2e57e3d91761eae77cf8',1,'menu.h']]],
+  ['showmenu2_368',['showMenu2',['../menu_8h.html#a166c30f6721afc681db9d5a8a6f03914',1,'menu.h']]],
+  ['showmenuoption_369',['showMenuOption',['../menu_8h.html#a752eb00955ac1b4770b2c7ab1a02fc77',1,'menu.h']]],
+  ['showproductsalesandprofit_370',['showProductSalesAndProfit',['../menu_8h.html#adf251be7abf374f2c764958efc251f97',1,'menu.h']]],
+  ['showproductsboughtbyclient_371',['showProductsBoughtByClient',['../menu_8h.html#a559d9eeaaf5109b86c2fb1e5f387d348',1,'menu.h']]],
+  ['showproductsbuyers_372',['showProductsBuyers',['../menu_8h.html#a232c09fc3260ef4fea31987bd014508d',1,'menu.h']]],
+  ['showproductsneverbought_373',['showProductsNeverBought',['../menu_8h.html#a163d25184f1b0424e026934065726979',1,'menu.h']]],
+  ['showproductsstartbyletter_374',['showProductsStartbyLetter',['../menu_8h.html#a08ea567d5c1b792182b7ea9b03da66f0',1,'menu.h']]],
+  ['showsalesandprofit_375',['showSalesAndProfit',['../menu_8h.html#a2f1a9d165d68a80fcb4f1d823b554897',1,'menu.h']]],
+  ['showtopsoldproducts_376',['showTopSoldProducts',['../menu_8h.html#a9818e3967e968333d10f62fb50f73c94',1,'menu.h']]],
+  ['sizeofproducts_377',['sizeOfProducts',['../sales_8h.html#ac6be8a5cb824f062acde8790aa571bb1',1,'sales.h']]],
+  ['sizeofproductsneverboughtallbranches_378',['sizeOfProductsNeverBoughtAllBranches',['../products_8h.html#a5eef0fc39691c0e52e7b0b5a3e733032',1,'products.h']]],
+  ['sizeofproductsneverboughteverybranch_379',['sizeOfProductsNeverBoughtEveryBranch',['../products_8h.html#a324b656e71492b096917c2a6bdf26feb',1,'products.h']]],
+  ['sort_380',['sort',['../sales_8h.html#a9d0be766c72edbd1da680041a12863d0',1,'sales.h']]],
+  ['sortbyletter_381',['sortByLetter',['../clients_8h.html#ae3c95f59b2fbc8858990ac10dba1e9ba',1,'clients.h']]]
+];

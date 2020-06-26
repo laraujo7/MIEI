@@ -1,0 +1,262 @@
+-- | Este módulo define funções comuns da Tarefa 5 do trabalho prático.
+module Main where
+
+import Graphics.Gloss
+import Graphics.Gloss.Interface.Pure.Game
+import Graphics.Gloss.Juicy
+import Graphics.Gloss.Data.ViewPort
+import Data.List (transpose)
+import LI11819
+import Tarefa4_2018li1g002
+import Tarefa3_2018li1g002
+import Tarefa2_2018li1g002
+import Tarefa1_2018li1g002
+import Tarefa0_2018li1g002
+
+
+type EstadoMapa = (Picture,Picture,Picture)
+type EstadoJogadores = (Picture,Picture,Picture,Picture)
+type EstadoCanhao = (Picture,Picture,Picture,Picture)
+type EstadoLaser = (Picture,Picture,Picture,Picture)
+type EstadoChoque = (Picture,Picture,Picture,Picture)
+type EstadoDisparo = (EstadoCanhao,EstadoLaser,EstadoChoque)
+type EstadoGloss = (Estado,EstadoJogadores,EstadoDisparo,EstadoMapa,Picture,[Int])
+
+
+main :: IO ()
+main = do j1 <- loadJuicy "j.png"
+          j2 <- loadJuicy "j2.png"
+          j3 <- loadJuicy "j3.png"
+          j4 <- loadJuicy "j4.png"
+          i <- loadJuicy "paredeI.png"
+          d <- loadJuicy "paredeD.png"
+          v <- loadJuicy "Vazia.png"
+          b <- loadJuicy "background.png"
+          play dm                   -- janela onde irá correr o jogo
+                (greyN 0.5)             -- côr do fundo da janela
+                fr                      -- frame rate
+                (estadoGlossInicial j1 j2 j3 j4 i d v b) -- estado inicial
+                desenhaEstadoGloss      -- desenha o estado do jogo
+                reageEventoGloss        -- reage a um evento
+                reageTempoGloss         -- reage ao passar do tempo
+fr :: Int
+fr = 5
+
+dm :: Display
+dm = InWindow "Game of Tanks" (1280, 768) (200, 200)
+
+{-- --}
+convertFloat :: Int -> Float
+convertFloat x = fromIntegral x :: Float
+
+estadoGlossInicial :: Maybe Picture -> Maybe Picture -> Maybe Picture -> Maybe Picture -> Maybe Picture -> Maybe Picture -> Maybe Picture -> Maybe Picture -> EstadoGloss
+estadoGlossInicial (Just j1) (Just j2) (Just j3) (Just j4) (Just i) (Just d) (Just v) (Just b) = ((Estado (mapaInicial (30,30)) [(Jogador (1,1) D 6 3 3),(Jogador (1,27) B 6 3 3),(Jogador (27,27) E 6 3 3),(Jogador (27,1) C 6 3 3)] []),(j1,j2,j3,j4),(((disparoCanhao 0),(disparoCanhao 1),(disparoCanhao 2),(disparoCanhao 3)),((disparoLaser 0),(disparoLaser 1),(disparoLaser 2),(disparoLaser 3)),((disparoChoque 0),(disparoChoque 1),(disparoChoque 2),(disparoChoque 3))),(i,d,v),b,[0,1,2,3])
+
+disparoCanhao :: Int -> Picture
+disparoCanhao i = Color (escolheCor i) (Polygon [(0,0),(2,0),(1,1),(0,0)])
+
+disparoLaser :: Int -> Picture
+disparoLaser i = Color (escolheCor i) (Polygon [(0,0),(1,0),(1,1),(0,1),(0,0)])
+
+disparoChoque :: Int -> Picture
+disparoChoque i = Color (escolheCor i) (Line [(0,0),(3,0),(3,3),(0,3),(0,0)])
+
+escolheCor :: Int -> Color
+escolheCor 0 = red
+escolheCor 1 = green
+escolheCor 2 = white
+escolheCor 3 = orange
+
+{-- Desenhar o Estado do Jogo --}
+desenhaEstadoGloss :: EstadoGloss -> Picture
+desenhaEstadoGloss ((Estado m j d),ej,((c1,c2,c3,c4),(l1,l2,l3,l4),(h1,h2,h3,h4)),(i,ds,v),b,h)
+                  | length h == 0 = Pictures [Scale (0.5) (0.5) $ Color black $ text "Empate!"]
+                  | length h == 1 = Pictures [Scale (0.5) (0.5) $ Color black $ text "VENCEU!"]
+                  | otherwise = applyViewPortToPicture (initialViewport) (Pictures [applyViewPortToPicture (backGroundViewPort) b,      -- background picture
+                                                                         applyViewPortToPicture (mapaViewPort) (lenght(pegaImagem m (i,ds,v))),                               -- picture do mapa
+                                                                         (Pictures (desenhaJogadores j h ej)),                                     -- picture dos jogadores
+                                                                         (Pictures (desenhaDisparoCanhao d (c1,c2,c3,c4))),                        -- picture dos disparos canhao
+                                                                         (Pictures (desenhaDisparoLaser d m (l1,l2,l3,l4))),                       -- picture dos disparos laser
+                                                                         (Pictures (desenhaDisparoChoque d j (h1,h2,h3,h4)))                        -- picture dos disparos choque
+                                                                                    ])
+
+{--              ViewPort                  --}
+pecaViewPort :: ViewPort
+pecaViewPort = ViewPort { viewPortTranslate = (-50,0), viewPortRotate = 0, viewPortScale = 0.05 }
+
+initialViewport :: ViewPort
+initialViewport = ViewPort { viewPortTranslate = (-500, 70), viewPortRotate = 0, viewPortScale = 0.9 }
+
+backGroundViewPort :: ViewPort
+backGroundViewPort = ViewPort { viewPortTranslate = (300,10), viewPortRotate = 0, viewPortScale = 1.2 }
+
+jogadoresViewPort1 :: ViewPort
+jogadoresViewPort1 = ViewPort { viewPortTranslate = (-13,-365), viewPortRotate = 0, viewPortScale = 1 }
+
+jogadoresViewPort2 :: ViewPort
+jogadoresViewPort2 = ViewPort { viewPortTranslate = (-13,-365), viewPortRotate = 0, viewPortScale = 1 }
+
+jogadoresViewPort3 :: ViewPort
+jogadoresViewPort3 = ViewPort { viewPortTranslate = (-13,-365), viewPortRotate = 0, viewPortScale = 1 }
+
+jogadoresViewPort4 :: ViewPort
+jogadoresViewPort4 = ViewPort { viewPortTranslate = (-13,-365), viewPortRotate = 0, viewPortScale = 1 }
+
+canhaoViewPort1 :: ViewPort
+canhaoViewPort1 = ViewPort { viewPortTranslate = (-1,-38), viewPortRotate = 0, viewPortScale = 9 }
+
+mapaViewPort :: ViewPort
+mapaViewPort = ViewPort { viewPortTranslate = (0,20), viewPortRotate = 0, viewPortScale = 10 }
+
+
+{--            Desenha Mapa                --}
+pegaImagem :: Mapa -> EstadoMapa -> [[Picture]]
+pegaImagem [] m = []
+pegaImagem (h:t) m = (construir h m) : pegaImagem t m
+
+construir :: [Peca] -> EstadoMapa -> [Picture]
+construir [] _ = []
+construir (h:t) (i,d,v) | h == Vazia = (applyViewPortToPicture (pecaViewPort) v) : construir t (i,d,v)
+                        | h == Bloco Indestrutivel = (applyViewPortToPicture (pecaViewPort) i) : construir t (i,d,v)
+                        | otherwise = (applyViewPortToPicture (pecaViewPort) d) : construir t (i,d,v)
+
+lenght :: [[Picture]] -> Picture
+lenght m = Pictures (funcAux m (0,0))
+
+funcAux :: [[Picture]] -> (Float,Float) -> [Picture]
+funcAux [] _ = []
+funcAux ([]:t) (x,y) = funcAux t (0,(y-2))
+funcAux ((h:t):s) (x,y) = (Translate x y h) : funcAux (t:s) ((x+2),y)
+
+{--            Desenha Jogadores         --}
+desenhaJogadores :: [Jogador] -> [Int] -> EstadoJogadores -> [Picture]
+desenhaJogadores [] _ _ = []
+desenhaJogadores (h:t) (i:is) j = (desenhaJogador h i j) : desenhaJogadores t is j
+
+desenhaJogador :: Jogador -> Int -> EstadoJogadores -> Picture
+desenhaJogador (Jogador (x,y) a b c d) i (j1,j2,j3,j4) | i == 0 && b>0 = applyViewPortToPicture (jogadoresViewPort1) (Translate (convertFloat x*19.68) (convertFloat y*19.6) j1)
+                                                       | i == 1 && b>0 = applyViewPortToPicture (jogadoresViewPort2) (Translate (convertFloat x*19.68) (convertFloat y*19.6) j2)
+                                                       | i == 2 && b>0 = applyViewPortToPicture (jogadoresViewPort3) (Translate (convertFloat x*19.68) (convertFloat y*19.6) j3)
+                                                       | i == 3 && b>0 = applyViewPortToPicture (jogadoresViewPort4) (Translate (convertFloat x*19.68) (convertFloat y*19.6) j4)
+                                                       | otherwise = Blank
+
+{--        Desenha Disparos Canhao      --}
+desenhaDisparoCanhao :: [Disparo] -> EstadoCanhao -> [Picture]
+desenhaDisparoCanhao [] _ = []
+desenhaDisparoCanhao ((DisparoCanhao i (x,y) d):t) (c1,c2,c3,c4) | i == 0 = applyViewPortToPicture (canhaoViewPort1) (Translate (convertFloat x*2) (convertFloat y*2) (rotateCanhao d c1)) : desenhaDisparoCanhao t (c1,c2,c3,c4)
+                                                                 | i == 1 = (Translate (convertFloat x) (convertFloat y) c2) : desenhaDisparoCanhao t (c1,c2,c3,c4)
+                                                                 | i == 2 = (Translate (convertFloat x) (convertFloat y) c3) : desenhaDisparoCanhao t (c1,c2,c3,c4)
+                                                                 | otherwise = (Translate (convertFloat x) (convertFloat y) c4) : desenhaDisparoCanhao t (c1,c2,c3,c4)
+desenhaDisparoCanhao (_:t) k = desenhaDisparoCanhao t k
+
+{--        Desenha Disparos Laser      --}
+desenhaDisparoLaser :: [Disparo] -> Mapa -> EstadoLaser -> [Picture]
+desenhaDisparoLaser [] _ _ = []
+desenhaDisparoLaser ((DisparoLaser i (x,y) d):t) m (l1,l2,l3,l4) | i == 0 = applyViewPortToPicture (canhaoViewPort1) (Pictures (printLaser (laserPosicao (DisparoLaser i (x,y) d) m) l1)) : desenhaDisparoLaser t m (l1,l2,l3,l4)
+                                                                 | i == 1 = (printLaser (laserPosicao (DisparoLaser i (x,y) d) m) l2) ++ desenhaDisparoLaser t m (l1,l2,l3,l4)
+                                                                 | i == 2 = (printLaser (laserPosicao (DisparoLaser i (x,y) d) m) l3) ++ desenhaDisparoLaser t m (l1,l2,l3,l4)
+                                                                 | i == 3 = (printLaser (laserPosicao (DisparoLaser i (x,y) d) m) l4) ++ desenhaDisparoLaser t m (l1,l2,l3,l4)
+desenhaDisparoLaser (_:t) m (l1,l2,l3,l4) = desenhaDisparoLaser t m (l1,l2,l3,l4)
+
+printLaser :: [Posicao] -> Picture -> [Picture]
+printLaser [] _ = []
+printLaser ((x,y):t) p = (Translate (convertFloat x) (convertFloat y) p) : printLaser t p
+
+{--         Desenha Disparos Choque      --}
+desenhaDisparoChoque :: [Disparo] -> [Jogador] -> EstadoChoque -> [Picture]
+desenhaDisparoChoque [] _ _ = []
+desenhaDisparoChoque ((DisparoChoque a t):ts) j (h1,h2,h3,h4) | a == 0 = desenhaChoque (encontraIndiceLista a j) h1 : desenhaDisparoChoque ts j (h1,h2,h3,h4)
+                                                              | a == 1 = desenhaChoque (encontraIndiceLista a j) h2 : desenhaDisparoChoque ts j (h1,h2,h3,h4)
+                                                              | a == 2 = desenhaChoque (encontraIndiceLista a j) h3 : desenhaDisparoChoque ts j (h1,h2,h3,h4)
+                                                              | a == 3 = desenhaChoque (encontraIndiceLista a j) h4 : desenhaDisparoChoque ts j (h1,h2,h3,h4)
+desenhaDisparoChoque (_:t) j (h1,h2,h3,h4) = desenhaDisparoChoque t j (h1,h2,h3,h4)
+
+desenhaChoque :: Jogador -> Picture -> Picture
+desenhaChoque (Jogador (x,y) d v l c) p = (Translate (convertFloat x) (convertFloat y) p)
+
+{-- funcao axiliar que vai ajudar a rotaçao dos jogadores --}
+rotateJogadores :: Jogador -> Direcao -> Picture -> Picture
+rotateJogadores (Jogador (x,y) d v l c) D p | d == D = p
+                                            | d == B = (Rotate 270 p)
+                                            | d == E = (Rotate 180 p)
+                                            | otherwise = (Rotate 90 p)
+rotateJogadores (Jogador (x,y) d v l c) E p | d == E = p
+                                            | d == C = (Rotate 270 p)
+                                            | d == D = (Rotate 180 p)
+                                            | otherwise = (Rotate 90 p)
+rotateJogadores (Jogador (x,y) d v l c) C p | d == C = p
+                                            | d == D = (Rotate 270 p)
+                                            | d == B = (Rotate 180 p)
+                                            | otherwise= (Rotate 90 p)
+rotateJogadores (Jogador (x,y) d v l c) B p | d == B = p
+                                            | d == E = (Rotate 270 p)
+                                            | d == C = (Rotate 180 p)
+                                            | otherwise = (Rotate 90 p)
+
+rotateCanhao :: Direcao -> Picture -> Picture
+rotateCanhao d p | d == D = p
+                 | d == B = (Rotate 90 p)
+                 | d == E = (Rotate 180 p)
+                 | otherwise = (Rotate 270 p)
+
+{-- Reage a um evento que vai alterar o estado do jogo --}
+reageEventoGloss :: Event -> EstadoGloss -> EstadoGloss
+reageEventoGloss (EventKey (SpecialKey KeyUp) Down k w) ((Estado m j d),(j1,j2,j3,j4),((ec),(el),(eh)),blocos,b,vivos) = ((jogada 0 (Movimenta D) (Estado m j d)),((rotateJogadores (encontraIndiceLista 0 j) D j1),j2,j3,j4),((ec),(el),(eh)),blocos,b,vivos)
+
+
+reageEventoGloss (EventKey (SpecialKey KeyDown) Down _ _) ((Estado m j d),(j1,j2,j3,j4),((ec),(el),(eh)),blocos,b,vivos) = ((jogada 0 (Movimenta E) (Estado m j d)),((rotateJogadores (encontraIndiceLista 0 j) E j1),j2,j3,j4),((ec),(el),(eh)),blocos,b,vivos)
+
+reageEventoGloss (EventKey (SpecialKey KeyLeft) Down _ _) ((Estado m j d),(j1,j2,j3,j4),((ec),(el),(eh)),blocos,b,vivos) = ((jogada 0 (Movimenta C) (Estado m j d)),((rotateJogadores (encontraIndiceLista 0 j) C j1),j2,j3,j4),((ec),(el),(eh)),blocos,b,vivos)
+
+reageEventoGloss (EventKey (SpecialKey KeyRight) Down _ _) ((Estado m j d),(j1,j2,j3,j4),((ec),(el),(eh)),blocos,b,vivos) = ((jogada 0 (Movimenta B) (Estado m j d)),((rotateJogadores (encontraIndiceLista 0 j) B j1),j2,j3,j4),((ec),(el),(eh)),blocos,b,vivos)
+
+reageEventoGloss (EventKey (Char ',') Down _ _) ((Estado m j d),(j1,j2,j3,j4),((c1,c2,c3,c4),(el),(eh)),blocos,b,vivos) = ((jogada 0 (Dispara Canhao) (Estado m j d)),(j1,j2,j3,j4),((c1,c2,c3,c4),(el),(eh)),blocos,b,vivos)
+
+--reageEventoGloss (EventKey (Char '.') Down _ _) ((Estado m j d),(j1,j2,j3,j4),((ec),(l1,l2,l3,l4),(eh)),blocos,b,vivos) = ((jogada 0 (Dispara Laser) (Estado m j d)),(j1,j2,j3,j4),((ec),(( l1),l2,l3,l4),(eh)),blocos,b,vivos)
+
+reageEventoGloss _ s = s -- ignora qualquer outro evento 
+
+
+
+
+
+
+
+
+
+
+
+reageTempoGloss :: Float -> EstadoGloss -> EstadoGloss
+reageTempoGloss n (a,b,c,d,e,f) = ((tick a),b,c,d,e,(jogadoresVivos a f))
+
+{-- Lista de jogadores vivos --}
+
+jogadoresVivos :: Estado -> [Int] -> [Int]
+jogadoresVivos (Estado m [] d) _ = []
+jogadoresVivos (Estado m ((Jogador (x,y) d v l c):t) i) (h:ts) | v == 0 = jogadoresVivos (Estado m t i) ts
+                                                               | otherwise = h : jogadoresVivos (Estado m t i) ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
