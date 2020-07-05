@@ -1,1 +1,0 @@
-      94     796    4128 out/input.txt

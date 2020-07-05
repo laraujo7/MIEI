@@ -1,5 +1,0 @@
-mycp :
-buffer size (256) -> 0.000284s
-buffer size (502) -> 0.000136s
-buffer size (1004) -> 0.000347s
-buffer size (4096) -> 0.000204s
