@@ -1,0 +1,2 @@
+Tempo de execuçao (myreadln_3) -> 0.002772
+Tempo de execuçao (myreadln_4) -> 0.000377
