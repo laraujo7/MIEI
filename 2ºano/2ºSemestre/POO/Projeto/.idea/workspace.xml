@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="22fd49b7-efcf-4abf-b664-99513fcb605c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../1ºano/1ºSemestre/PF/Fichas/Ficha8/Ficha8.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../1ºano/1ºSemestre/PF/Fichas/Ficha8/Ficha8.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../1ºano/1ºSemestre/PF/Fichas/Ficha9/Ficha9.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../1ºano/1ºSemestre/PF/Fichas/Ficha9/Ficha9.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../1ºano/2ºSemestre/LI2/LI2_PL2_9/Ficheiros.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../1ºano/2ºSemestre/LI2/LI2_PL2_9/Ficheiros.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Exames/src/Exame1718/Exame1718.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Exames/src/Exame1718/Exame1718.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../3ºano/1ºsemestre/SD/Fichas/Ficha1/src/Ex1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../3ºano/1ºsemestre/SD/Fichas/Ficha1/src/Ex2/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../3ºano/1ºsemestre/SD/Fichas/Ficha1/src/Ex2/Bank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../3ºano/1ºsemestre/SD/Fichas/Ficha1/src/Ex2/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../3ºano/1ºsemestre/SD/Fichas/Ficha1/src/Ex2/Ex2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../3ºano/1ºsemestre/SD/Fichas/Ficha1/src/Ex3/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../3ºano/1ºsemestre/SD/Fichas/Ficha1/src/Ex3/Bank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../3ºano/1ºsemestre/SD/Fichas/Ficha1/src/Ex3/Ex3.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../3ºano/1ºsemestre/SD/Fichas/Ficha1/src/Ex3/Ex3.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectId" id="1gFL8yxylC58oldZjK1RdzJtK4n" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="22fd49b7-efcf-4abf-b664-99513fcb605c" name="Default Changelist" comment="" />
+      <created>1597705237434</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597705237434</updated>
+      <workItem from="1608011920071" duration="128000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="569" y="346" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1597705300325">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="569" y="346" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1440.900@0.0.1440.900" timestamp="1597705300325" />
+  </component>
+</project>
