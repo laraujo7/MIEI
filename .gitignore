@@ -84,6 +84,9 @@ cabal.project.local~
 # Log file
 *.log
 
+# Ideia files
+ideia/*
+
 # BlueJ files
 *.ctxt
 

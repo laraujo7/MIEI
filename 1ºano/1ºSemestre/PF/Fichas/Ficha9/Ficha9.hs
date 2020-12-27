@@ -166,6 +166,8 @@ premio x y = let p = comuns x y
                      (1,2) -> (Just 11)
                      (2,1) -> (Just 12)
                      (2,0) -> (Just 13)
+                     (1,1) -> (Just 14)
+                     (1,0) -> (Just 15)
                      _ -> Nothing
 --2ºd
 leAposta :: IO Aposta

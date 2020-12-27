@@ -185,9 +185,8 @@ tamanhaString (Debito x) b  | length b == 0 = "                               "
 
 
 
-
-
-
+-- Exemplo
+exemplo = Ext 10 [((D 10 12 1990),"Comprassss",(Credito 20)), ((D 11 12 1990),"Outras comprdsadasdadas", (Debito 100))]
 
 
 
