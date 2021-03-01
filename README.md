@@ -26,7 +26,7 @@ This repository contains all the projects that I developed and exercises solved 
   - [Functional Programming](/1ºano/1ºSemestre/PF):
     All exercises and testes (2018/19).
 
-  - [Discrete Math Topics](/1ºano/1ºSemestre/TMD):
+  - [Discrete Math Topics](/1ºano/1ºSemestre/TMD):
     All exercises and testes (2018/19).
 
 - ##### 2nd semester
@@ -34,7 +34,7 @@ This repository contains all the projects that I developed and exercises solved 
   - [Software Labs II](/1ºano/2ºSemestre/LI2):
     This project is a version of the `Reversi` board game built in C.
   
-  - [Imperial Programming](/1ºano/2ºSemestre/PI):
+  - [Imperial Programming](/1ºano/2ºSemestre/PI):
     All exercises and testes (2018/19).
 
   - [Computing Systems](/1ºano/2ºSemestre/SC):
@@ -73,13 +73,13 @@ This repository contains all the projects that I developed and exercises solved 
     programming language using abstraction and reflections to automatically generate the app user interface (View) from the Model. 
     
   - [Operating System](/2ºano/2ºSemestre/SO):
-    All exercises and project build in C to `control, communicate, and monitor of processes`.
+    All exercises and project build in C to `Control, Communicate, and Monitor of Processes`.
     
 ### **3rd year**
 
 - ##### 1st semester
    
-  - (18/20) [Software Development Systems](/3ºano/1ºSemestre/DSS/):
+  - [Software Development Systems](/3ºano/1ºSemestre/DSS/):
     This project is a Warehouse Managment System in Java, with a beautiful GUI in JavaFX, capable of managing an robot automated warehouse with multiple different  users at the same time - using an     online database. Additionally we built a Web Page capable of requesting Orders to the warehouse coded in JavaScript. Like in previous Java projects we made a terminal shell (now its used more as a development tool to quickly test queries and debug) that is generated automatically from the model source code using abstraction and reflextions.  
     
 
