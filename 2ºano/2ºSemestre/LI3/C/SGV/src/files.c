@@ -13,7 +13,7 @@ void getFiles(char* clientsFilePath,char*  productsFilePath,char* salesFilePath)
         if (i == 2) printf(COR_B_VERDE "Sales File Path : " COR_RESET);
         
         fgets(files, 256, stdin);
-
+        
         if(i==0) valido = verifyFiles(files,clientsFilePath);
         if(i==1) valido = verifyFiles(files,productsFilePath);
         if(i==2) valido = verifyFiles(files,salesFilePath);

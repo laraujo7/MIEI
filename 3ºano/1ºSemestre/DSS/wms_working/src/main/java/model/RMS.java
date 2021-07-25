@@ -72,9 +72,9 @@ public class RMS implements IRMS {
         return Math.sqrt(
                 Math.pow(station.getCoordinates().getKey() - robot.getCoordinates().getKey(), 2)
                         + Math.pow(
-                                station.getCoordinates().getValue()
-                                        - robot.getCoordinates().getValue(),
-                                2));
+                        station.getCoordinates().getValue()
+                                - robot.getCoordinates().getValue(),
+                        2));
     }
 
     @Override
@@ -170,7 +170,7 @@ public class RMS implements IRMS {
                                     (e1, e2) -> (int)
                                             (robotPalletHeuristic(r, e1.getValue().getKey())
                                                     - robotPalletHeuristic(
-                                                            r, e2.getValue().getValue())))
+                                                    r, e2.getValue().getValue())))
                             .findFirst()
                             .orElse(null);
 
@@ -215,7 +215,7 @@ public class RMS implements IRMS {
         switch (idStation) {
             case "1":
                 notificationDAO.putNotification("ROBOT \"ROB" + robotId + "\" PICKED UP " + palletDAO.get(idPallet).getType().toUpperCase() + " PALLET \"PAL" + idPallet + "\" FROM RECEIVING STATION");
-            break;
+                break;
 
             case "2":
                 notificationDAO.putNotification("ROBOT \"ROB" + robotId + "\" PICKED UP " + palletDAO.get(idPallet).getType().toUpperCase() + " PALLET \"PAL" + idPallet + "\" FROM SHIPPING STATION");

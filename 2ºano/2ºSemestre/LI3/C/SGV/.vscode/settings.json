@@ -1,0 +1,12 @@
+{
+  "files.associations": {
+    ".sequelizerc": "javascript",
+    ".stylelintrc": "json",
+    ".prettierrc": "json",
+    "interface.h": "c",
+    "stdio.h": "c",
+    "menu.h": "c",
+    "products.h": "c"
+  },
+  "C_Cpp.errorSquiggles": "Disabled"
+}

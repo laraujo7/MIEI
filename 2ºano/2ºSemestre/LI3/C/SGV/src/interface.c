@@ -21,6 +21,7 @@ void destroySGV(SGV sgv) {
 
 
 SGV loadSGVFromFiles(SGV sgv, char* clientsFilePath, char* productsFilePath, char* salesFilePath) {
+    
     return loadSGV(sgv,clientsFilePath,productsFilePath,salesFilePath);
 }
 
